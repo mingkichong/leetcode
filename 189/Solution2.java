@@ -3,8 +3,8 @@ import java.util.Arrays;
 public class Solution2 {
     public void rotate(int[] nums, int k) {
         int N = nums.length;
-        k = (k % N);
         // k = nums.length-k; //left or right rotate
+        k = (k % N);
         reverse(nums, 0, N-1);
         reverse(nums, 0, k-1);
         reverse(nums, k, N-1);
