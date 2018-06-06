@@ -22,17 +22,16 @@ class Solution {
                         set.add(answer);
                         answers.add(answer);
                     }
-                    int prevR = r;while(prevR == r){r--;}
-                    int prevL = l;while(prevL == l){l++;}
+                    int prevR = nums[r];while(r > 0 && prevR == nums[r]){r--;}
+                    int prevL = nums[l];while(l < nums.length && prevL == nums[l]){l++;}
                 }else if(nums[r] + nums[l] + nums[i] > 0){
-                    int prevR = r;while(prevR == r){r--;}
+                    int prevR = nums[r];while(r > 0 && prevR == nums[r]){r--;}
                 }
                 else{
-                    int prevL = l;while(prevL == l){l++;}
+                    int prevL = nums[l];while(l < nums.length && prevL == nums[l]){l++;}
                 }
             }
         }
-
 
         // for(int i = 0; i < nums.length-2; i++){
         //     for(int j = i+1; j < nums.length-1; j++){
