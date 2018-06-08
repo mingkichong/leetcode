@@ -2,26 +2,25 @@ import java.util.*;
 
 public class Solution {
     public String longestCommonPrefix(String[] strs) {
-    	if(strs.length == 0){
+    	if(strs == null || strs.length == 0){
     		return "";
     	}
-        Arrays.sort(strs, new Comparator<String>(){
-        	@Override
-        	public int compare(String a, String b){
-        		return 
-        			(a.length() == b.length()) ? 
-        				0
-        			: (a.length() < b.length()) ?
-        				-1
-        			:
-        				1;
-        	}
-		});
-        int length = strs[0].length();
+
+    	int shortestLength = Integer.MAX_VALUE;
+    	String shortestString = "";
+
+    	for(String s : strs){
+    		if(s.length() < shortestLength){
+    			shortestLength = s.length();
+    			shortestString = s;
+    		}
+    	}
+
+        int length = shortestString.length();
         while(length > 0){
-        	String sstr = strs[0].substring(0, length);
+        	String sstr = shortestString.substring(0, length);
         	boolean isPrefix = true;
-        	for(int i = 1; i < strs.length; i++){
+        	for(int i = 0; i < strs.length; i++){
         		if(sstr.compareTo(strs[i].substring(0, length)) != 0){
         			isPrefix = false;
         			break;
@@ -40,6 +39,6 @@ public class Solution {
 
     public static void main(String args[]){
     	Solution s = new Solution();
-    	System.out.println(s.longestCommonPrefix(new String[]{"flower","flow","floight"}));
+    	System.out.println(s.longestCommonPrefix(new String[]{"ca","a"}));
     }
 }
