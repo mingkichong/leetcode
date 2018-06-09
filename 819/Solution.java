@@ -12,15 +12,9 @@ class Solution {
         		map.put(s, ((map.containsKey(s)) ? map.get(s) : 0) + 1 );
         	}
         }
-    	int maxCount = -1;
-		String maxKey = "";
-		for (Map.Entry<String, Integer> entry : map.entrySet()){
-			if(maxCount < entry.getValue()){
-				maxCount = entry.getValue();
-				maxKey = entry.getKey();
-			}
-		}
-		return maxKey;
+
+        //https://leetcode.com/problems/most-common-word/discuss/123854/C++JavaPython-Easy-Solution-with-Explanation
+		return Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 
     public static void main(String args[]){
