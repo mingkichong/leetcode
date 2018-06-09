@@ -5,15 +5,10 @@ class Solution {
     	paragraph = paragraph.toLowerCase();
         StringTokenizer st = new StringTokenizer(paragraph, "!?',;. ");
         HashMap<String, Integer> map = new HashMap<String, Integer>();
+        HashSet<String> bannedSet = new HashSet<String>(Arrays.asList(banned));
         while(st.hasMoreElements()){
         	String s = st.nextToken();
-        	boolean isBanned = false;
-        	for(int i = 0; i < banned.length; i++){
-        		if(s.compareTo(banned[i]) == 0){
-        			isBanned = true;
-        		}
-        	}
-        	if(!isBanned){
+        	if(!bannedSet.contains(s)){
         		map.put(s, ((map.containsKey(s)) ? map.get(s) : 0) + 1 );
         	}
         }
