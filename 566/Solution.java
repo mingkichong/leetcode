@@ -7,23 +7,35 @@ class Solution {
         }
         int n_r = nums.length;
         int n_c = nums[0].length;
-
         if(n_r * n_c != r * c){
             return nums;
         }
 
-        LinkedList<Integer> queue = new LinkedList<>();
+        int t[] = new int[n_r*n_c];
         for(int i = 0; i < n_r; i++){
             for(int j = 0; j < n_c; j++){
-                queue.add(nums[i][j]);
+                t[i*n_c + j] = nums[i][j];
             }
         }
         int ans[][] = new int[r][c];
         for(int i = 0; i < r; i++){
             for(int j = 0; j < c; j++){
-                ans[i][j] = queue.remove();
+                ans[i][j] = t[i * c + j];
             }
         }
+
+        // LinkedList<Integer> queue = new LinkedList<>();
+        // for(int i = 0; i < n_r; i++){
+        //     for(int j = 0; j < n_c; j++){
+        //         queue.add(nums[i][j]);
+        //     }
+        // }
+        // int ans[][] = new int[r][c];
+        // for(int i = 0; i < r; i++){
+        //     for(int j = 0; j < c; j++){
+        //         ans[i][j] = queue.remove();
+        //     }
+        // }
 
         // int ans[][] = new int[r][c];
         // int ri = 0, cj = 0;
