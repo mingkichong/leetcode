@@ -7,6 +7,10 @@ class ListNode{
 }
 
 class Solution {
+    /*
+        using stack
+    */
+    /*
     public ListNode reverseList(ListNode head) {
         if(head == null){
             return head;
@@ -29,6 +33,66 @@ class Solution {
         }
 
         return head;
+    }
+    */
+
+
+    /*
+        brute force
+    */
+    /*
+    public ListNode reverseList(ListNode node) {
+        if(node == null){
+                return null;
+        }
+        else if(node.next == null){
+                return node;
+        }
+
+        ListNode head = null;
+        ListNode current = node;
+        ListNode beforeCurrent = node;
+
+        while(current != null && current.next != null){
+
+                while(current != null){
+                        if(head == null && current.next == null){
+                                head = current;
+                        }
+                        if(current.next != null){
+                                beforeCurrent = current;
+                        }
+                        else{
+                                break;
+                        }
+                        current = current.next;
+                }
+                current.next = beforeCurrent;
+                beforeCurrent.next = null;
+
+                current = node;
+                beforeCurrent = node;
+        }
+
+        return head;
+    }
+    */
+
+
+    /*
+        O(n)
+    */
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+        while(current != null){
+            ListNode next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        return prev;
     }
 
     public static void main(String args[]){
