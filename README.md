@@ -1,3 +1,5 @@
 # my_leet
 
-Some solutions for LeetCode
+To create a new templated directory
+    
+    ./make_new_solution.sh <new_dir>
