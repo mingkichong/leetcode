@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Solution {
-        public int divide(int dividend, int divisor) {
+    public int divide(int dividend, int divisor) {
         if(divisor == 1){
             return dividend;
         }
