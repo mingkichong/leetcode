@@ -49,9 +49,26 @@ class Solution {
     public static void main(String args[]){
         Solution s = new Solution();
         // int [][] intervals = {{1,3},{15,18},{2,6},{8,10}};
-        int [][] intervals = {{0,3},{1,2}};
+        // int [][] intervals = {{0,3},{1,2}};
+        int [][] intervals = createIntervals(10, 100, 10);
+        for(int[] interval : intervals){
+            System.out.print(Arrays.toString(interval));
+            System.out.print(", ");
+        }
+        System.out.println();
         s.merge(intervals);
         System.out.println(Arrays.deepToString(s.merge(intervals)));
+    }
+
+    static int [][] createIntervals(int N, int maxStart, int maxRange){
+        int[][] results = new int[N][];
+        Random ran = new Random();
+        for(int i = 0; i < results.length; i++){
+            results[i] = new int[2];
+            results[i][0] = ran.nextInt(maxStart);
+            results[i][1] = results[i][0] + ran.nextInt(maxRange);
+        }
+        return results;
     }
 }
 
