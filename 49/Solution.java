@@ -10,8 +10,8 @@ class Solution {
             map.put(key, keyStrings);
         }
         List<List<String>> results = new ArrayList<List<String>>();
-        for(Map.Entry<String, List<String>> entry : map.entrySet()){
-            results.add(entry.getValue());
+        for(List<String> entry : map.values()){
+            results.add(entry);
         }
         return results;
     }
