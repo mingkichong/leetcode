@@ -4,8 +4,21 @@ start_making(){
     ### Check if a directory does not exist ###
     if [ ! -d "./$1" ]; then
         mkdir $1;
-        cp Templates/template_Solution.java ./$1/
-        mv ./$1/template_Solution.java ./$1/Solution.java
+        cat << EOF > ./$1/Solution.java
+import java.util.*;
+
+class Solution {
+    public String __something() {
+        return "SAMPLE";
+    }
+
+    public static void main(String args[]){
+        Solution s = new Solution();
+        System.out.println(s.__something());
+    }
+}
+
+EOF
         echo "javac *.java && java Solution" > ./$1/run.sh
         chmod 555 ./$1/run.sh
     else
