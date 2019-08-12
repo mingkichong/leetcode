@@ -1,27 +1,25 @@
 import java.util.*;
 
 class Solution {
-    public List<List<Integer>> combine(int n, int k) {
-        int [] vals = new int[n];
+    public List<List<Integer>> combine(final int N, int k) {
+        int [] vals = new int[N];
         for(int i = 0; i < vals.length; i++){
             vals[i] = i+1;
         }
-        boolean isReverse = k > (n+1)/2;
+        boolean isReverse = k > (N+1)/2;
         if(isReverse){
-            k = n - k;
-
+            k = N - k;
         }
-
         List<List<Integer>> lists = new ArrayList<List<Integer>>();
         lists.add(new ArrayList<Integer>());
         combine(vals, k, lists);
         if(isReverse){
-            reverseCombine(n, lists);
+            reverseCombine(N, lists);
         }
         return lists;
     }
 
-    void reverseCombine(int N, List<List<Integer>> lists){
+    void reverseCombine(final int N, List<List<Integer>> lists){
         int L = lists.size();
         List<Integer> nL = new ArrayList<Integer>();
         for(int i = 0; i < N; i++){
@@ -64,7 +62,7 @@ class Solution {
 
     public static void main(String args[]){
         Solution s = new Solution();
-        int N = 5, K = 5;
+        final int N = 5, K = 4;
         List<List<Integer>> sets = s.combine(N,K);
         print(sets);
         System.out.println("Size: " + sets.size());
