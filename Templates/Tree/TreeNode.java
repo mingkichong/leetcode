@@ -45,10 +45,37 @@ public class TreeNode {
         printWithOrder(node, TraverseOrder.PREORDER);
         printWithOrder(node, TraverseOrder.INORDER);
         printWithOrder(node, TraverseOrder.POSTORDER);
+        printBFS(node);
+    }
+
+    public static void printBFS(TreeNode head){
+        System.out.print("[");
+        if(head == null){
+            System.out.println("]");
+            return;
+        }
+        ArrayList<TreeNode> queue = new ArrayList<TreeNode>();
+        queue.add(head);
+        while(queue.size() > 0){
+            TreeNode node = queue.remove(0);
+            System.out.print(node.val);
+            System.out.print(", ");
+            if(node.left != null){
+                queue.add(node.left);
+            }
+            if(node.right != null){
+                queue.add(node.right);
+            }
+        }
+        System.out.println("]");
     }
 
     public static void printWithOrder(TreeNode node, TraverseOrder order){
         System.out.print("[");
+        if(node == null){
+            System.out.println("]");
+            return;
+        }
         traversePrint(node, order);
         System.out.println("]");
     }
