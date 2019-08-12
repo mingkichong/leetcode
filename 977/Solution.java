@@ -3,60 +3,64 @@ import java.util.*;
 class Solution {
     public int[] sortedSquares(int[] A) {
         int min = Integer.MAX_VALUE;
-        int minI = -1;
+        int m = -1;
         for(int i = 0; i < A.length; i++){
             A[i] *= A[i];
             if(A[i] < min){
                 min = A[i];
-                minI = i;
+                m = i;
             }
         }
-        int [] B = new int[A.length];
-        int bI = 0;
-        int l = minI - 1;
-        int r = minI;
+        int l = 0, r = A.length - 1, ls = 0;
+        System.out.println(Arrays.toString(A) + "\tLS:" + A[ls] + ", L:" + A[l] + ", M:" + A[m] + ", R:" + A[r] + " START");
+        while(l < r){
+            if(A[l] > A[r]){
+                swap(A, l, r);
+                System.out.println(Arrays.toString(A) + "\tLS:" + A[ls] + ", L:" + A[l] + ", M:" + A[m] + ", R:" + A[r] + " SWAP l r");
+                l++;
+                System.out.println(Arrays.toString(A) + "\tLS:" + A[ls] + ", L:" + A[l] + ", M:" + A[m] + ", R:" + A[r] + " L+1");
+            }
 
-        while(l >= 0 && r < A.length){
-            B[bI++] = A[(A[l] < A[r]) ? l--: r++];
-            // if(A[l] < A[r]){
-            //     B[bI] = A[l];
-            //     l--;
-            // }
-            // else{
-            //     B[bI] = A[r];
-            //     r++;
-            // }
-            // bI++;
-        }
+            r--;
+            System.out.println(Arrays.toString(A) + "\tLS:" + A[ls] + ", L:" + A[l] + ", M:" + A[m] + ", R:" + A[r] + " R-1");
 
-        while(l >= 0){
-            B[bI++] = A[l--];
-            // B[bI] = A[l];
-            // bI++; l--;
+            if(r == m){
+                swap(A, ls, m);
+                System.out.println(Arrays.toString(A) + "\tLS:" + A[ls] + ", L:" + A[l] + ", M:" + A[m] + ", R:" + A[r] + " SWAP ls m");
+                ls++;
+                System.out.println(Arrays.toString(A) + "\tLS:" + A[ls] + ", L:" + A[l] + ", M:" + A[m] + ", R:" + A[r] + " LS + 1");
+                l = ls;
+                r = A.length - 1;
+                System.out.println(Arrays.toString(A) + "\tLS:" + A[ls] + ", L:" + A[l] + ", M:" + A[m] + ", R:" + A[r] + " L = LS R = len");
+                while(m > 0 && A[m-1] < A[m]){
+                    m--;
+                    System.out.println(Arrays.toString(A) + "\tLS:" + A[ls] + ", L:" + A[l] + ", M:" + A[m] + ", R:" + A[r] + " MOVE m");
+                }
+            }
         }
-        while(r < A.length){
-            B[bI++] = A[r++];
-            // B[bI] = A[r];
-            // bI++; r++;
-        }
+        return A;
+    }
 
-        return B;
+    void swap(int[] A, int i, int j){
+        int temp = A[i];
+        A[i] = A[j];
+        A[j] = temp;
     }
 
     public static void main(String args[]){
         Solution s = new Solution();
-        Random random = new Random();
-        int N = random.nextInt(20) + 20;
-        int [] A = new int[N];
-        int range = 200;
-        for(int i = 0; i < N; i++){
-            A[i] = random.nextInt(range + 1) - range/2;
-        }
-        Arrays.sort(A);
-        System.out.println(Arrays.toString(A));
-        // int [] A = {-16,-15,-9,-8,-4,-3,-1,0,2,5,6,7,19};
+        // Random random = new Random();
+        // int N = random.nextInt(20) + 20;
+        // int [] A = new int[N];
+        // int range = 200;
+        // for(int i = 0; i < N; i++){
+        //     A[i] = random.nextInt(range + 1) - range/2;
+        // }
+        // Arrays.sort(A);
+        int [] A = {-16,-15,-9,-8,-4,-3,-1,0,2,5,6,7,19};
         // int [] A = {-16,-2, 0, 3, 4, 19};
         // int [] A = {-4, -3, 0, 2};
+        System.out.println(Arrays.toString(A));
         System.out.println(Arrays.toString(s.sortedSquares(A)));
     }
 }
