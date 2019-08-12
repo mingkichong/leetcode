@@ -45,7 +45,16 @@ class Solution {
 
     public static void main(String args[]){
         Solution s = new Solution();
-        int [] A = {-16,-15,-9,-8,-4,-3,-1,0,2,5,6,7,19};
+        Random random = new Random();
+        int N = random.nextInt(20) + 20;
+        int [] A = new int[N];
+        int range = 200;
+        for(int i = 0; i < N; i++){
+            A[i] = random.nextInt(range + 1) - range/2;
+        }
+        Arrays.sort(A);
+        System.out.println(Arrays.toString(A));
+        // int [] A = {-16,-15,-9,-8,-4,-3,-1,0,2,5,6,7,19};
         // int [] A = {-16,-2, 0, 3, 4, 19};
         // int [] A = {-4, -3, 0, 2};
         System.out.println(Arrays.toString(s.sortedSquares(A)));
