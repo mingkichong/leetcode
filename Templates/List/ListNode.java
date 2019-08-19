@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class ListNode {
      int val;
      ListNode next;
@@ -17,6 +19,18 @@ public class ListNode {
             }
         }
         return head;
+     }
+
+     static ListNode createRandomList(int length, int minVal, int maxVal, boolean isSorted){
+        Random random = new Random();
+        int [] A = new int[length];
+        for(int i = 0; i < A.length; i++){
+            A[i] = random.nextInt(maxVal-minVal) + minVal;
+        }
+        if(isSorted){
+            Arrays.sort(A);
+        }
+        return createList(A);
      }
 
      @Override public String toString(){
