@@ -14,6 +14,7 @@ class Solution {
 
     public static void main(String args[]){
         Solution s = new Solution();
+        Random random = new Random();
         System.out.println(s.__something());
     }
 }
