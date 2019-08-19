@@ -14,16 +14,20 @@ class Solution {
                     left = node;
                     l = left;
                 }
-                l.next = node;
-                l = l.next;
+                else{
+                    l.next = node;
+                    l = l.next;
+                }
             }
             else{
                 if(right == null){
                     right = node;
                     r = right;
                 }
-                r.next = node;
-                r = r.next;
+                else{
+                    r.next = node;
+                    r = r.next;
+                }
             }
             node = next;
         }
