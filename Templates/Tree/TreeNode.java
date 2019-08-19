@@ -39,15 +39,6 @@ public class TreeNode {
         return nodes[0];
     }
 
-    public static void main(String args[]){
-        int [][] nums = {{10},{5},{15},{3},{7},{13},{18},{1},null,{6}};
-        TreeNode node = createList(nums);
-        printWithOrder(node, TraverseOrder.PREORDER);
-        printWithOrder(node, TraverseOrder.INORDER);
-        printWithOrder(node, TraverseOrder.POSTORDER);
-        printBFS(node);
-    }
-
     public static void printBFS(TreeNode head){
         System.out.print("[");
         if(head == null){
