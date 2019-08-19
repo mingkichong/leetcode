@@ -6,11 +6,66 @@ public class TreeNode {
     TreeNode right;
     TreeNode(int x) { val = x; }
 
-    public static TreeNode createList(int[][] nums){
+    private static boolean isNull(int [][] nums){
+        if(nums == null || nums.length == 0){
+            return true;
+        }
+        return false;
+    }
+
+    public static TreeNode createBinarySearchTree(int [][] nums){
+        if(isNull(nums)){
+            return null;
+        }
+        int count = 0;
+        for(int [] N : nums){
+            if(N != null){
+                count++;
+            }
+        }
+        int [] flatNums = new int[count];
+        int i = 0;
+        for(int [] N : nums){
+            if(N != null){
+                flatNums[i] = N[0];
+                i++;
+            }
+        }
+        return createBinarySearchTree(flatNums);
+    }
+
+    public static TreeNode createBinarySearchTree(int [] nums){
         if(nums == null || nums.length == 0){
             return null;
         }
-        if(nums.length == 1 && nums[0] == null){
+        TreeNode root = new TreeNode(nums[0]);
+        for(int i = 1; i < nums.length; i++){
+            addBinarySearchTreeNode(root, nums[i]);
+        }
+        return root;
+    }
+
+    private static void addBinarySearchTreeNode(TreeNode node, int num){
+        if(num < node.val){
+            if(node.left == null){
+                node.left = new TreeNode(num);
+            }
+            else{
+                addBinarySearchTreeNode(node.left, num);
+            }
+        }
+        else{
+            if(node.right == null){
+                node.right = new TreeNode(num);
+            }
+            else{
+                addBinarySearchTreeNode(node.right, num);
+            }
+        }
+    }
+
+    public static TreeNode createBinaryTree(int[][] nums){
+        if(isNull(nums)){
             return null;
         }
         TreeNode [] nodes = new TreeNode[nums.length];
@@ -45,12 +100,13 @@ public class TreeNode {
             System.out.println("]");
             return;
         }
+        StringBuilder sb = new StringBuilder();
         ArrayList<TreeNode> queue = new ArrayList<TreeNode>();
         queue.add(head);
         while(queue.size() > 0){
             TreeNode node = queue.remove(0);
-            System.out.print(node.val);
-            System.out.print(", ");
+            sb.append(node.val);
+            sb.append(", ");
             if(node.left != null){
                 queue.add(node.left);
             }
@@ -58,41 +114,50 @@ public class TreeNode {
                 queue.add(node.right);
             }
         }
+        sb.deleteCharAt(sb.length()-1).deleteCharAt(sb.length()-1);
+        System.out.print(sb.toString());
         System.out.println("]");
     }
 
     public static void printWithOrder(TreeNode node, TraverseOrder order){
+        if(order == TraverseOrder.BFS){
+            printBFS(node);
+            return;
+        }
         System.out.print("[");
         if(node == null){
             System.out.println("]");
             return;
         }
-        traversePrint(node, order);
+        StringBuilder sb = new StringBuilder();
+        traversePrint(node, order, sb);
+        sb.deleteCharAt(sb.length()-1).deleteCharAt(sb.length()-1);
+        System.out.print(sb.toString());
         System.out.println("]");
     }
 
-    static void traversePrint(TreeNode node, TraverseOrder order){
+    private static void traversePrint(TreeNode node, TraverseOrder order, StringBuilder sb){
         if(node == null){
             return;
         }
         switch(order){
             case PREORDER:
-                System.out.print(node.val);
-                System.out.print(", ");
-                traversePrint(node.left, order);
-                traversePrint(node.right, order);
+                sb.append(node.val);
+                sb.append(", ");
+                traversePrint(node.left, order, sb);
+                traversePrint(node.right, order, sb);
                 break;
             case INORDER:
-                traversePrint(node.left, order);
-                System.out.print(node.val);
-                System.out.print(", ");
-                traversePrint(node.right, order);
+                traversePrint(node.left, order, sb);
+                sb.append(node.val);
+                sb.append(", ");
+                traversePrint(node.right, order, sb);
                 break;
             case POSTORDER:
-                traversePrint(node.left, order);
-                traversePrint(node.right, order);
-                System.out.print(node.val);
-                System.out.print(", ");
+                traversePrint(node.left, order, sb);
+                traversePrint(node.right, order, sb);
+                sb.append(node.val);
+                sb.append(", ");
                 break;
         }
     }

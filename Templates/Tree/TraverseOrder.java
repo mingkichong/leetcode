@@ -1,3 +1,3 @@
 public enum TraverseOrder{
-    INORDER, PREORDER, POSTORDER
+    INORDER, PREORDER, POSTORDER, BFS
 }
