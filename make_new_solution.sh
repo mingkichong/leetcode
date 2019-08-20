@@ -30,13 +30,27 @@ class Solution {
 EOF
         echo "javac *.java && java Solution" > ./$1/run.sh
         chmod 555 ./$1/run.sh
+        echo "./$1/ directory created"
     else
         echo "directory ./$1/ already exists"
+    fi
+
+    if [ -d "./$1" ]; then
+        if [ "$2" == "tree" ]; then
+            cp ./Templates/Tree/TreeNode.java ./$1/
+            cp ./Templates/Tree/TraverseOrder.java ./$1/
+            echo "copied Tree classes to ./$1/"
+        elif [ "$2" == "list" ]; then
+            cp ./Templates/List/ListNode.java ./$1/
+            echo "copied List classes to ./$1/"
+        fi
+    else
+        echo "directory ./$1/ does not exist"
     fi
 }
 
 if [ "$1" != "" ]; then
-	start_making $1
+	start_making $1 $2
 else
 	echo Invalid: \$1 is not set
 fi
