@@ -8,13 +8,21 @@ start_making(){
 import java.util.*;
 
 class Solution {
+    final static boolean DEBUG = true;
+    final static boolean RANDOM_INPUT = true;
+
     public String __something() {
         return "SAMPLE";
     }
 
     public static void main(String args[]){
         Solution s = new Solution();
-        Random random = new Random();
+        if(Solution.RANDOM_INPUT){
+            Random random = new Random();
+        }
+        if(Solution.DEBUG){
+            System.out.println("DEBUG MESSAGE");
+        }
         System.out.println(s.__something());
     }
 }
