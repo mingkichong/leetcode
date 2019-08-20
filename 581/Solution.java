@@ -2,54 +2,34 @@ import java.util.*;
 
 class Solution {
     final static boolean DEBUG = true;
+    final static boolean RANDOM_INPUT = true;
     public int findUnsortedSubarray(int[] nums) {
         int N = nums.length;
-        int l = 0, r = N-1;
-        while(l <= r && l < N && isFrontSmallest(nums, l, r)){
-            while(l+1 < N && nums[l] == nums[l+1]){
-                l++;
+        int l = N-1, r = 0;
+        int min = nums[l], max = nums[r];
+        for(int i = l-1; i >= 0; i--){
+            min = Math.min(min, nums[i]);
+            if(nums[i] > min){
+                l = i;
             }
-            l++;
         }
-        while(l <= r && r >= 0 && isBackLargest(nums, l, r)){
-            while(r-1 >= 0 && nums[r] == nums[r-1]){
-                r--;
+        for(int i = r; i < N; i++){
+            max = Math.max(max, nums[i]);
+            if(nums[i] < max){
+                r = i;
             }
-            r--;
         }
         if(Solution.DEBUG){
-            System.out.println(String.format("%s,%s", l, r));
+            System.out.println(l + "," + r);
         }
         return r - l + 1;
     }
 
-    boolean isFrontSmallest(int [] nums, int l, int r){
-        if(l == r){
-            return true;
-        }
-        int min = nums[l];
-        for(int i = l+1; i <= r; i++){
-            min = Math.min(min, nums[i]);
-        }
-        return nums[l] == min;
-    }
-
-    boolean isBackLargest(int [] nums, int l, int r){
-        if(l == r){
-            return true;
-        }
-        int max = nums[r];
-        for(int i = r-1; i >= l; i--){
-            max = Math.max(max, nums[i]);
-        }
-        return nums[r] == max;
-    }
-
     public static void main(String args[]){
         Solution s = new Solution();
-        int [] nums = {1,2,3,4,5,6,7,8};
+        int [] nums = {-1, -5, -3, -1, 1, 2, 5};
         int min = nums.length, max = 0;
-        if(Solution.DEBUG){
+        if(Solution.RANDOM_INPUT){
             Random random = new Random();
             nums = new int[random.nextInt(30) + 5];
             for(int i = 0; i < nums.length; i++){
@@ -66,7 +46,9 @@ class Solution {
             }
             nums[0] = random.nextInt(3) == 0 ? -5 : nums[0];
             nums[nums.length-1] = random.nextInt(3) == 0 ? 5 : nums[nums.length-1];
-            System.out.println("length: " + nums.length + " sort: " + min + "," + max);
+        }
+        if(Solution.DEBUG){
+            System.out.println("length: " + nums.length + (Solution.RANDOM_INPUT ? " sort: " + min + "," + max : ""));
         }
         System.out.println(Arrays.toString(nums));
         System.out.println(s.findUnsortedSubarray(nums));
