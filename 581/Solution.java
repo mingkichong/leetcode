@@ -22,6 +22,9 @@ class Solution {
         if(Solution.DEBUG){
             System.out.println(l + "," + r);
         }
+        if(r-l <= 0){
+            return 0;
+        }
         return r - l + 1;
     }
 
