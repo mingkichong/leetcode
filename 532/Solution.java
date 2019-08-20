@@ -7,25 +7,21 @@ class Solution {
         if(nums == null || k < 0){
             return 0;
         }
-        int duplicates = 0;
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
         for(int n : nums){
-            int value = map.getOrDefault(n, 0) + 1;
-            map.put(n, value);
+            map.put(n, map.getOrDefault(n, 0) + 1);
         }
-        for(int value : map.values()){
-            if(value > 1){
-                duplicates++;
-            }
-        }
-        if(k == 0){
-            return duplicates;
-        }
-        List<Integer> list = new ArrayList<Integer>(map.keySet());
         int count = 0;
-        for(int i : list){
-            if(map.containsKey(i-k) && i-k != i){
-                count++;
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            if(k == 0){
+                if(entry.getValue() > 1){
+                    count++;
+                }
+            }
+            else{
+                if(map.containsKey(entry.getKey() + k)){
+                    count++;
+                }
             }
         }
         return count;
