@@ -1,25 +1,25 @@
 import java.util.*;
 
 public class Solution {
-    // you need treat n as an unsigned value
+
     public int reverseBits(int n) {
-    	boolean[] bits = new boolean[32];
-    	for(int i = 0; i < bits.length; i++){
-    		bits[i] = (n % 2) == 1;
-    		n >>= 1;
-    	}
-    	int ans = 0;
-    	for(int i = 0; i < bits.length; i++){
-    		ans <<= 1;
-    		if(bits[i]){
-				ans += 1;
-			}
-    	}
-    	return ans;
+        int rN = 0;
+        for(int i = 0; i < Integer.SIZE; i++){
+            rN = rN << 1;
+            rN += n & 1;
+            n = n >> 1;
+        }
+        return rN;
     }
 
     public static void main(String args[]){
     	Solution s = new Solution();
-    	System.out.println(s.reverseBits(43261596));
+        int N = 43261596;
+        System.out.println(padding(N));
+    	System.out.println(padding(s.reverseBits(N)));
+    }
+
+    static String padding(int N){
+        return String.format("%32s", Integer.toBinaryString(N)).replace(' ', '0');
     }
 }
