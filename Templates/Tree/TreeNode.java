@@ -113,9 +113,6 @@ public class TreeNode {
         queue.add(head);
         while(queue.size() > 0){
             TreeNode node = queue.remove(0);
-            if(node == null){
-                continue;
-            }
             sb.append(node.val);
             sb.append(", ");
             if(node.left != null){
