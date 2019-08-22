@@ -64,6 +64,16 @@ public class TreeNode {
         }
     }
 
+    public static TreeNode createBinaryTree(Integer[] n){
+        int[][] nums = new int[n.length][1];
+        for(int i = 0; i < n.length; i++){
+            if(n[i] != null){
+                nums[i] = new int[]{n[i]};
+            }
+        }
+        return createBinaryTree(nums);
+    }
+
     public static TreeNode createBinaryTree(int[] n){
         int[][] nums = new int[n.length][1];
         for(int i = 0; i < nums.length; i++){
