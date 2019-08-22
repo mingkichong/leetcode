@@ -5,26 +5,19 @@ class Solution {
     final static boolean RANDOM_INPUT = true;
 
     public int diameterOfBinaryTree(TreeNode root) {
-        List<TreeNode> leaves = new ArrayList<TreeNode>();
-        findLeaves(root, leaves);
-        if(Solution.DEBUG){
-            for(TreeNode node : leaves){
-                System.out.print(node.val + " ");
-            }
-            System.out.println();
-        }
-        return -1;
+        int [] max = {0};
+        findLeaves(root, max);
+        return max[0];
     }
 
-    void findLeaves(TreeNode node, List<TreeNode> leaves){
+    private int findLeaves(TreeNode node, int[] max){
         if(node == null){
-            return;
+            return 0;
         }
-        if(node.left == null && node.right == null){
-            leaves.add(node);
-        }
-        findLeaves(node.left, leaves);
-        findLeaves(node.right, leaves);
+        int left  = findLeaves(node.left, max);
+        int right = findLeaves(node.right, max);
+        max[0] = Math.max(max[0], left+right);
+        return 1 + Math.max(left, right);
     }
 
     public static void main(String args[]){
