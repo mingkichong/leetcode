@@ -90,6 +90,9 @@ public class TreeNode {
         queue.add(nodes[index++]);
         while(queue.size() > 0){
             TreeNode node = queue.remove(0);
+            if(node == null){
+                continue;
+            }
             if(index < nodes.length){
                 node.left = nodes[index++];
                 queue.add(node.left);
