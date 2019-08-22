@@ -5,10 +5,10 @@ class Solution {
     final static boolean RANDOM_INPUT = true;
 
     public boolean isValidBST(TreeNode node) {
-        return isValidBST(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return isValidBST(node, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    boolean isValidBST(TreeNode node, int min, int max) {
+    boolean isValidBST(TreeNode node, long min, long max) {
         if(node == null){
             return true;
         }
