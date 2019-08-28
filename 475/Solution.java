@@ -1,37 +1,22 @@
 import java.util.*;
+import java.util.stream.*;
 
 class Solution {
     final static boolean DEBUG = true;
     final static boolean RANDOM_INPUT = true;
 
     public int findRadius(int[] houses, int[] heaters) {
-        houses = Arrays.stream(houses).distinct().toArray();
-        heaters = Arrays.stream(heaters).distinct().toArray();
-
-        int maxHouse = Integer.MIN_VALUE;
-        int minHouse = Integer.MAX_VALUE;
-
-        HashSet<Integer> heatersSet = new HashSet<>();
-        for(int h : heaters){
-            heatersSet.add(h);
-            maxHouse = Math.max(maxHouse, h);
-            minHouse = Math.min(minHouse, h);
-        }
-        ArrayList<Integer> newHouses = new ArrayList<>();
-        for(int h : houses){
-            if(!heatersSet.contains(h)){
-                newHouses.add(h);
-            }
-            maxHouse = Math.max(maxHouse, h);
-            minHouse = Math.min(minHouse, h);
-        }
-
-        houses = new int[newHouses.size()];
-        for(int i = 0; i < houses.length; i++){
-            houses[i] = newHouses.get(i);
-        }
-
-        int l = 0, r = maxHouse-minHouse;
+        HashSet<Integer> heatersSet = Arrays.stream(heaters)
+                                            .boxed()
+                                            .collect(Collectors.toCollection(HashSet::new));
+        heaters = heatersSet.stream()
+                            .mapToInt(w -> w)
+                            .toArray();
+        houses = Arrays.stream(houses)
+                       .distinct()
+                       .filter(w -> !heatersSet.contains(w))
+                       .toArray();
+        int l = 0, r = 1000000000;
         int mid = 0;
         int prevMid = 0;
         boolean isAllHeated = true;
