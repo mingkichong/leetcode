@@ -5,7 +5,23 @@ class Solution {
     final static boolean RANDOM_INPUT = true;
 
     public int countSegments(String s) {
-        return new StringTokenizer(s).countTokens();
+        int count = 0;
+        int slow = 0, fast = 0;
+        char[] sArr = s.toCharArray();
+        for(;slow < sArr.length && fast < sArr.length;){
+            if(sArr[slow] == ' '){
+                slow++;
+                fast = slow;
+            }
+            else{
+                count++;
+                while(fast < sArr.length && sArr[fast] != ' '){
+                    fast++;
+                }
+                slow = fast;
+            }
+        }
+        return count;
     }
 
     public static void main(String args[]){
