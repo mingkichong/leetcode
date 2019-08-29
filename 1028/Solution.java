@@ -5,15 +5,18 @@ class Solution {
     final static boolean RANDOM_INPUT = true;
 
     public TreeNode recoverFromPreorder(String S) {
-        List<Integer> nums = new ArrayList<Integer>();
-        List<String> dashes = new ArrayList<String>();
+        List<Integer> nums = new ArrayList<>();
+        List<Integer> dashes = new ArrayList<>();
         char [] A = S.toCharArray();
         int start = 0; int startDash = 0;
         char prevC = '-';
+        int maxDashLevel = 0;
         for(int i = 0; i < S.length(); i++){
             if(isNum(A[i])){
                 if(isDash(prevC)){
-                    dashes.add(S.substring(startDash, i));
+                    int length = S.substring(startDash, i).length();
+                    maxDashLevel = Math.max(maxDashLevel, length);
+                    dashes.add(length);
                     start = i;
                 }
             }
@@ -27,10 +30,39 @@ class Solution {
         }
         nums.add(Integer.parseInt(S.substring(start, S.length())));
 
-        for(int i = 0; i < nums.size(); i++){
-            System.out.println(dashes.get(i).length() + " " + nums.get(i));
+        List<List<TreeNode>> BFSTree = new ArrayList<>();
+        for(int i = 0; i <= maxDashLevel; i++){
+            List<TreeNode> list = new ArrayList<>();
+            BFSTree.add(list);
         }
-        return null;
+        for(int i = 0; i < dashes.size(); i++){
+            TreeNode node = new TreeNode(nums.get(i));
+            BFSTree.get(dashes.get(i)).add(node);
+        }
+
+        for(int i = 0; i < BFSTree.size() - 1; i++){
+            List<TreeNode> parents = BFSTree.get(i);
+            List<TreeNode> children = BFSTree.get(i+1);
+            int childrenIndex = 0;
+            for(int j = 0; j < parents.size(); j++){
+                TreeNode parent = parents.get(j);
+                for(int k = 0; k < 2; k++){
+                    if(childrenIndex < children.size()){
+                        if(parent.left == null || parent.right == null){
+                            TreeNode child = children.get(childrenIndex);
+                            childrenIndex++;
+                            if(parent.left == null){
+                                parent.left = child;
+                            }
+                            else{
+                                parent.right = child;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return BFSTree.get(0).get(0);
     }
 
     private boolean isDash(char c){
@@ -43,8 +75,9 @@ class Solution {
 
     public static void main(String args[]){
         Solution s = new Solution();
-        String S = "1-401--349---90--88";
-        System.out.println(s.recoverFromPreorder(S));
+        String S = "1-2--3---4-5--6---7";
+        //expect 1,2,3,4,5,6,7
+        TreeNode.printWithOrder(s.recoverFromPreorder(S), TraverseOrder.PREORDER);
     }
 }
 
