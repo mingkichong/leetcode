@@ -115,71 +115,68 @@ public class TreeNode {
         return nodes[0];
     }
 
-    public static void printBFS(TreeNode head){
+    public static void printWithOrder(TreeNode node, TraverseOrder order){
         System.out.print("[");
-        if(head == null){
+        if(node == null){
             System.out.println("]");
             return;
         }
         StringBuilder sb = new StringBuilder();
+        ArrayList<String> list = new ArrayList<>();
+        traversePrint(node, order, list);
+        for(int i = 0; i < list.size(); i++){
+            sb.append(list.get(i));
+            if(i < list.size()-1){
+                sb.append(", ");
+            }
+        }
+        System.out.print(sb.toString());
+        System.out.println("]");
+    }
+
+    private static void traversePrint(TreeNode node, TraverseOrder order, List<String> list){
+        if(node == null){
+            list.add("null");
+            return;
+        }
+        switch(order){
+            case BFS:
+                printBFS(node, list);
+                break;
+            case PREORDER:
+                list.add("" + node.val);
+                traversePrint(node.left, order, list);
+                traversePrint(node.right, order, list);
+                break;
+            case INORDER:
+                traversePrint(node.left, order, list);
+                list.add("" + node.val);
+                traversePrint(node.right, order, list);
+                break;
+            case POSTORDER:
+                traversePrint(node.left, order, list);
+                traversePrint(node.right, order, list);
+                list.add("" + node.val);
+                break;
+        }
+    }
+
+    private static void printBFS(TreeNode head, List<String> list){
+        if(head == null){
+            return;
+        }
         ArrayList<TreeNode> queue = new ArrayList<TreeNode>();
         queue.add(head);
         while(queue.size() > 0){
             TreeNode node = queue.remove(0);
-            sb.append(node.val);
-            sb.append(", ");
-            if(node.left != null){
-                queue.add(node.left);
+            if(node == null){
+                list.add("null");
             }
-            if(node.right != null){
+            else{
+                list.add("" + node.val);
+                queue.add(node.left);
                 queue.add(node.right);
             }
-        }
-        sb.deleteCharAt(sb.length()-1).deleteCharAt(sb.length()-1);
-        System.out.print(sb.toString());
-        System.out.println("]");
-    }
-
-    public static void printWithOrder(TreeNode node, TraverseOrder order){
-        if(order == TraverseOrder.BFS){
-            printBFS(node);
-            return;
-        }
-        System.out.print("[");
-        if(node == null){
-            System.out.println("]");
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        traversePrint(node, order, sb);
-        sb.deleteCharAt(sb.length()-1).deleteCharAt(sb.length()-1);
-        System.out.print(sb.toString());
-        System.out.println("]");
-    }
-
-    private static void traversePrint(TreeNode node, TraverseOrder order, StringBuilder sb){
-        if(node == null){
-            return;
-        }
-        switch(order){
-            case PREORDER:
-                sb.append(node.val);
-                sb.append(", ");
-                traversePrint(node.left, order, sb);
-                traversePrint(node.right, order, sb);
-                break;
-            case INORDER:
-                traversePrint(node.left, order, sb);
-                sb.append(node.val);
-                sb.append(", ");
-                traversePrint(node.right, order, sb);
-                break;
-            case POSTORDER:
-                traversePrint(node.left, order, sb);
-                traversePrint(node.right, order, sb);
-                sb.append(node.val);
-                sb.append(", ");
-                break;
         }
     }
 }

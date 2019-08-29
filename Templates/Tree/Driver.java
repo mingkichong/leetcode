@@ -17,6 +17,5 @@ class Driver{
         TreeNode.printWithOrder(head, TraverseOrder.INORDER);
         TreeNode.printWithOrder(head, TraverseOrder.POSTORDER);
         TreeNode.printWithOrder(head, TraverseOrder.BFS);
-        TreeNode.printBFS(head);
     }
 }
