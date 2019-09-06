@@ -127,6 +127,25 @@ public class TreeNode {
         System.out.println("]");
     }
 
+    public static void printTreeWithStructure(TreeNode node){
+        if(node == null){
+            System.out.println("──NULL──");
+        }
+        System.out.println("┌┐");
+        printTreeWithStructure(node, "│╞");
+        System.out.println("└┘");
+    }
+
+    public static void printTreeWithStructure(TreeNode node, String edge){
+        if(node == null){
+            return;
+        }
+        System.out.print(edge + "╡");
+        System.out.println(node.val);
+        printTreeWithStructure(node.left,  edge+"═══");
+        printTreeWithStructure(node.right, edge+"═══");
+    }
+
     private static boolean isNull(int [][] nums){
         if(nums == null || nums.length == 0){
             return true;
