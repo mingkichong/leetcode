@@ -5,32 +5,25 @@ class Solution {
     final static boolean RANDOM_INPUT = true;
 
     public String removeDuplicates(String S) {
-        StringBuilder sb = null;
-        do{
-            if(sb != null){
-                S = sb.toString();
+        Stack<Character> stack = new Stack<>();
+        for(char c : S.toCharArray()){
+            if(stack.size() != 0 && c == stack.peek()){
+                stack.pop();
             }
-            sb = new StringBuilder();
-            for(int i = 0; i < S.length(); i++){
-                if(i == S.length() - 1){
-                    sb.append(S.charAt(i));
-                }
-                else{
-                    if(S.charAt(i) == S.charAt(i+1)){
-                        i++;
-                    }
-                    else{
-                        sb.append(S.charAt(i));
-                    }
-                }
+            else{
+                stack.push(c);
             }
-        } while(!S.equals(sb.toString()));
-        return S;
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!stack.empty()){
+            sb.append(stack.pop());
+        }
+        return sb.reverse().toString();
     }
 
     public static void main(String args[]){
         Solution s = new Solution();
-        System.out.println(s.removeDuplicates("bbbaabbccb"));
+        System.out.println(s.removeDuplicates("bbbaabbccbabc"));
     }
 }
 
