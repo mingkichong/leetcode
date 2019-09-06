@@ -140,9 +140,9 @@ public class TreeNode {
         if(node == null){
             return;
         }
+        printTreeWithStructure(node.left,  edge+"═══");
         System.out.print(edge + "╡");
         System.out.println(node.val);
-        printTreeWithStructure(node.left,  edge+"═══");
         printTreeWithStructure(node.right, edge+"═══");
     }
 
