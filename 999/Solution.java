@@ -4,61 +4,30 @@ class Solution {
     final static boolean DEBUG = true;
     final static boolean RANDOM_INPUT = true;
 
-    public String __something() {
-        return "SAMPLE";
+    private int search(char [][] board, int x, int y, int dx, int dy){
+        while(x < board.length && x >= 0 &&
+              y < board.length && y >= 0 && board[x][y] != 'B'){
+            if(board[x][y] == 'p'){
+                return 1;
+            }
+            x += dx;
+            y += dy;
+        }
+        return 0;
     }
 
     public int numRookCaptures(char[][] board) {
-        int numOfPawns = 0;
-        int i = 0, j = 0;
-        label:
-        for(; i < board.length; i++){
-            for(; j < board[0].length; j++){
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[0].length; j++){
                 if(board[i][j] == 'R'){
-                    // isFound = true;
-                    break label;
+                    return search(board, i,j, 1, 0) +
+                           search(board, i,j,-1, 0) +
+                           search(board, i,j, 0, 1) +
+                           search(board, i,j, 0,-1);
                 }
             }
-            j = 0;
         }
-
-        for(int a = i; a >= 0; a--){
-            if(board[a][j] == 'p'){
-                numOfPawns++;
-                break;
-            }
-            if(board[a][j] == 'B'){
-                break;
-            }
-        }
-        for(int a = j; a >= 0; a--){
-            if(board[i][a] == 'p'){
-                numOfPawns++;
-                break;
-            }
-            if(board[i][a] == 'B'){
-                break;
-            }
-        }
-        for(int a = i; a < board.length; a++){
-            if(board[a][j] == 'p'){
-                numOfPawns++;
-                break;
-            }
-            if(board[a][j] == 'B'){
-                break;
-            }
-        }
-        for(int a = j; a < board.length; a++){
-            if(board[i][a] == 'p'){
-                numOfPawns++;
-                break;
-            }
-            if(board[i][a] == 'B'){
-                break;
-            }
-        }
-        return numOfPawns;
+        return 0;
     }
 
     public static void main(String args[]){
