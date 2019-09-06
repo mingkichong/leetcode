@@ -6,13 +6,6 @@ public class TreeNode {
     TreeNode right;
     TreeNode(int x) { val = x; }
 
-    private static boolean isNull(int [][] nums){
-        if(nums == null || nums.length == 0){
-            return true;
-        }
-        return false;
-    }
-
     public static TreeNode createBinarySearchTree(int [][] nums){
         if(isNull(nums)){
             return null;
@@ -35,7 +28,7 @@ public class TreeNode {
     }
 
     public static TreeNode createBinarySearchTree(int [] nums){
-        if(nums == null || nums.length == 0){
+        if(isNull(nums)){
             return null;
         }
         TreeNode root = new TreeNode(nums[0]);
@@ -132,6 +125,20 @@ public class TreeNode {
         }
         System.out.print(sb.toString());
         System.out.println("]");
+    }
+
+    private static boolean isNull(int [][] nums){
+        if(nums == null || nums.length == 0){
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isNull(int [] nums){
+        if(nums == null || nums.length == 0){
+            return true;
+        }
+        return false;
     }
 
     private static void traversePrint(TreeNode node, TraverseOrder order, List<String> list){
