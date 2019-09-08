@@ -6,19 +6,23 @@ class Solution {
 
     public List<String> commonChars(String[] A) {
         List<String> words = new ArrayList<>();
-        int [][] histo = new int[A.length][26];
-        for(int i = 0; i < A.length; i++){
-            for(char a : A[i].toCharArray()){
-                histo[i][a - 'a']++;
+        final int NUM_CHARS = 26;
+        int[] histo = new int[NUM_CHARS];
+        for(int i = 0; i < NUM_CHARS; i++){
+            histo[i] = Integer.MAX_VALUE;
+        }
+        for(String str : A){
+            int [] currHisto = new int[NUM_CHARS];
+            for(char a : str.toCharArray()){
+                currHisto[a-'a']++;
+            }
+            for(int j = 0; j < NUM_CHARS; j++){
+                histo[j] = Math.min(histo[j],currHisto[j]);
             }
         }
-        for(int j = 0; j < 26; j++){
-            int min = Integer.MAX_VALUE;
-            for(int i = 0; i < A.length; i++){
-                min = Math.min(min, histo[i][j]);
-            }
-            for(int k = 0; k < min; k++){
-                words.add("" + (char)(j + 'a'));
+        for(int i = 0; i < NUM_CHARS; i++){
+            for(int j = 0; j < histo[i]; j++){
+                words.add(Character.toString((char)('a' + i)));
             }
         }
         return words;
@@ -26,7 +30,7 @@ class Solution {
 
     public static void main(String args[]){
         Solution s = new Solution();
-        List<String> words = s.commonChars(new String[]{"cool","lock","cook"});
+        List<String> words = s.commonChars(new String[]{"bella","label","roller", "llll"});
         System.out.println(Arrays.toString(words.toArray()));
     }
 }
