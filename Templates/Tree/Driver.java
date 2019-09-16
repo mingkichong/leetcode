@@ -6,19 +6,19 @@ class Driver{
         // int [][] nums = {null};
         System.out.println("BINARY TREE");
         TreeNode head = TreeNode.createBinaryTree(nums3);
-        TreeNode.printWithOrder(head, TraverseOrder.PREORDER);
-        TreeNode.printWithOrder(head, TraverseOrder.INORDER);
-        TreeNode.printWithOrder(head, TraverseOrder.POSTORDER);
-        TreeNode.printWithOrder(head, TraverseOrder.BFS);
+        TreeNode.printWithOrder(head, TreeNode.TraverseOrder.PREORDER);
+        TreeNode.printWithOrder(head, TreeNode.TraverseOrder.INORDER);
+        TreeNode.printWithOrder(head, TreeNode.TraverseOrder.POSTORDER);
+        TreeNode.printWithOrder(head, TreeNode.TraverseOrder.BFS);
         TreeNode.printTreeWithStructure(head);
 
         System.out.println();
         System.out.println("BINARY SEARCH TREE");
         head = TreeNode.createBinarySearchTree(nums);
-        TreeNode.printWithOrder(head, TraverseOrder.PREORDER);
-        TreeNode.printWithOrder(head, TraverseOrder.INORDER);
-        TreeNode.printWithOrder(head, TraverseOrder.POSTORDER);
-        TreeNode.printWithOrder(head, TraverseOrder.BFS);
+        TreeNode.printWithOrder(head, TreeNode.TraverseOrder.PREORDER);
+        TreeNode.printWithOrder(head, TreeNode.TraverseOrder.INORDER);
+        TreeNode.printWithOrder(head, TreeNode.TraverseOrder.POSTORDER);
+        TreeNode.printWithOrder(head, TreeNode.TraverseOrder.BFS);
 
         TreeNode.printTreeWithStructure(head);
     }

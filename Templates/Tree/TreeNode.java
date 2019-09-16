@@ -6,6 +6,10 @@ public class TreeNode {
     TreeNode right;
     TreeNode(int x) { val = x; }
 
+    public enum TraverseOrder{
+        INORDER, PREORDER, POSTORDER, BFS
+    }
+
     public static TreeNode createBinarySearchTree(int [][] nums){
         if(isNull(nums)){
             return null;

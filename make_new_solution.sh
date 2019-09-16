@@ -38,7 +38,6 @@ EOF
     if [ -d "./$1" ]; then
         if [ "$2" == "tree" ]; then
             cp ./Templates/Tree/TreeNode.java ./$1/
-            cp ./Templates/Tree/TraverseOrder.java ./$1/
             echo "copied Tree classes to ./$1/"
         elif [ "$2" == "list" ]; then
             cp ./Templates/List/ListNode.java ./$1/
