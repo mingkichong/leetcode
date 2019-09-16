@@ -5,33 +5,19 @@ class Solution {
     final static boolean RANDOM_INPUT = true;
 
     public TreeNode insertIntoBST(TreeNode node, int val) {
-        TreeNode newNode = new TreeNode(val);
         if(node == null){
-            return newNode;
-        }
-        insert(node, null, newNode);
-        return node;
-    }
-
-    public void insert(TreeNode node, TreeNode parent, TreeNode newNode){
-        if(node == null){
-            if(newNode.val < parent.val){
-                parent.left = newNode;
-            }
-            else{
-                parent.right = newNode;
-            }
+            return new TreeNode(val);
         }
         else{
-            if(newNode.val < node.val){
-                insert(node.left, node, newNode);
+            if(val < node.val){
+                node.left = insertIntoBST(node.left, val);
             }
             else{
-                insert(node.right, node, newNode);
+                node.right = insertIntoBST(node.right, val);
             }
         }
+        return node;
     }
-
 
     public static void main(String args[]){
         Solution s = new Solution();
