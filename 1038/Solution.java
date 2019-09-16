@@ -6,27 +6,12 @@ class Solution {
 
     int sum = 0;
     public TreeNode bstToGst(TreeNode root) {
-        sum = treeSum(root);
-        traverse(root);
+        if(root == null){ return null; }
+        bstToGst(root.right);
+        root.val = sum + root.val;
+        sum = root.val;
+        bstToGst(root.left);
         return root;
-    }
-
-    private void traverse(TreeNode node){
-        if(node == null){
-            return;
-        }
-        traverse(node.left);
-        int val = node.val;
-        node.val = sum;
-        sum -= val;
-        traverse(node.right);
-    }
-
-    private int treeSum(TreeNode node){
-        if(node == null){
-            return 0;
-        }
-        return node.val + treeSum(node.left) + treeSum(node.right);
     }
 
     public static void main(String args[]){
