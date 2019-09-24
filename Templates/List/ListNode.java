@@ -5,6 +5,12 @@ public class ListNode {
      ListNode next;
      ListNode(int x) { val = x; }
 
+     static ListNode createList(Integer nums[]){
+        return createList(Arrays.stream(nums)
+                                .mapToInt(i -> (i == null) ? 0 : i) //make null to 0
+                                .toArray());
+     }
+
      static ListNode createList(int nums[]){
         ListNode head = null;
         ListNode node = null;
