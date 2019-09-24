@@ -37,13 +37,12 @@ public class ListNode {
         ListNode node = this;
         StringBuilder sb = new StringBuilder();
         while(node != null){
-            sb.append(node.val + " -> ");
+            sb.append(node.val);
+            if(node.next != null){
+                sb.append(" -> ");
+            }
             node = node.next;
         }
-        sb.deleteCharAt(sb.length()-1)
-          .deleteCharAt(sb.length()-1)
-          .deleteCharAt(sb.length()-1)
-          .deleteCharAt(sb.length()-1);
         return sb.toString();
      }
 }
