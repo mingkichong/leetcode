@@ -1,17 +1,17 @@
 import java.util.*;
 
 public class ListNode {
-     int val;
-     ListNode next;
-     ListNode(int x) { val = x; }
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
 
-     static ListNode createList(Integer nums[]){
+    static ListNode createList(Integer nums[]){
         return createList(Arrays.stream(nums)
                                 .mapToInt(i -> (i == null) ? 0 : i) //make null to 0
                                 .toArray());
-     }
+    }
 
-     static ListNode createList(int nums[]){
+    static ListNode createList(int nums[]){
         ListNode head = null;
         ListNode node = null;
         for(int n : nums){
@@ -25,9 +25,9 @@ public class ListNode {
             }
         }
         return head;
-     }
+    }
 
-     static ListNode createRandomList(int length, int minVal, int maxVal, boolean isSorted){
+    static ListNode createRandomList(int length, int minVal, int maxVal, boolean isSorted){
         Random random = new Random();
         int [] A = new int[length];
         for(int i = 0; i < A.length; i++){
@@ -37,9 +37,9 @@ public class ListNode {
             Arrays.sort(A);
         }
         return createList(A);
-     }
+    }
 
-     @Override public String toString(){
+    @Override public String toString(){
         ListNode node = this;
         StringBuilder sb = new StringBuilder();
         while(node != null){
@@ -50,5 +50,5 @@ public class ListNode {
             node = node.next;
         }
         return sb.toString();
-     }
+    }
 }
