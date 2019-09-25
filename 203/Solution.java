@@ -11,19 +11,13 @@ class Solution {
         prev.next = head;
         node = head;
         while(node != null){
-            while(node.val == val){
+            while(node != null && node.val == val){
                 prev.next = node.next;
                 node = node.next;
-                if(node == null){
-                    break;
-                }
             }
             prev = node;
             if(node != null){
                 node = node.next;
-            }
-            else{
-                break;
             }
         }
         return first.next;
