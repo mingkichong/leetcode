@@ -10,6 +10,19 @@ public class TreeNode {
         INORDER, PREORDER, POSTORDER, BFS
     }
 
+    public void print(){
+        System.out.println(this.toString());
+    }
+
+    public static void print(TreeNode node){
+        System.out.println(node.toString());
+    }
+
+    @Override
+    public String toString(){
+        return getTreeWithStructure(this);
+    }
+
     public static TreeNode createBinarySearchTree(int [][] nums){
         if(isNull(nums)){
             return null;
@@ -112,13 +125,12 @@ public class TreeNode {
         return nodes[0];
     }
 
-    public static void printWithOrder(TreeNode node, TraverseOrder order){
-        System.out.print("[");
+    private static void printWithOrder(TreeNode node, TraverseOrder order, StringBuilder sb){
+        sb.append("[");
         if(node == null){
-            System.out.println("]");
+            sb.append("]");
             return;
         }
-        StringBuilder sb = new StringBuilder();
         ArrayList<String> list = new ArrayList<>();
         traversePrint(node, order, list);
         for(int i = 0; i < list.size(); i++){
@@ -127,27 +139,37 @@ public class TreeNode {
                 sb.append(", ");
             }
         }
-        System.out.print(sb.toString());
-        System.out.println("]");
+        sb.append("]");
     }
 
-    public static void printTreeWithStructure(TreeNode node){
+    public static void printWithOrder(TreeNode node, TraverseOrder order){
+        StringBuilder sb = new StringBuilder();
+        printWithOrder(node, order, sb);
+        System.out.println(sb.toString());
+    }
+
+    private static String getTreeWithStructure(TreeNode node){
         if(node == null){
-            System.out.println("──NULL──");
+            return "──NULL──";
         }
-        System.out.println("┌┐");
-        printTreeWithStructure(node, "│╞");
-        System.out.println("└┘");
+        StringBuilder sb = new StringBuilder();
+        sb.append("┌┐");
+        sb.append("\n");
+        printTreeWithStructure(node, "│╞", sb);
+        sb.append("└┘");
+        sb.append("\n");
+        return sb.toString();
     }
 
-    public static void printTreeWithStructure(TreeNode node, String edge){
+    private static void printTreeWithStructure(TreeNode node, String edge, StringBuilder sb){
         if(node == null){
             return;
         }
-        printTreeWithStructure(node.left,  edge+"═══");
-        System.out.print(edge + "╡");
-        System.out.println(node.val);
-        printTreeWithStructure(node.right, edge+"═══");
+        printTreeWithStructure(node.left,  edge+"═══", sb);
+        sb.append(edge + "╡");
+        sb.append(node.val);
+        sb.append("\n");
+        printTreeWithStructure(node.right, edge+"═══", sb);
     }
 
     private static boolean isNull(int [][] nums){

@@ -10,7 +10,10 @@ class Driver{
         TreeNode.printWithOrder(head, TreeNode.TraverseOrder.INORDER);
         TreeNode.printWithOrder(head, TreeNode.TraverseOrder.POSTORDER);
         TreeNode.printWithOrder(head, TreeNode.TraverseOrder.BFS);
-        TreeNode.printTreeWithStructure(head);
+
+        TreeNode.print(head);
+        head.print();
+        System.out.println(head);
 
         System.out.println();
         System.out.println("BINARY SEARCH TREE");
@@ -20,6 +23,9 @@ class Driver{
         TreeNode.printWithOrder(head, TreeNode.TraverseOrder.POSTORDER);
         TreeNode.printWithOrder(head, TreeNode.TraverseOrder.BFS);
 
-        TreeNode.printTreeWithStructure(head);
+        TreeNode.print(head);
+        head.print();
+        System.out.println(head);
+
     }
 }
