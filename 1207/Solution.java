@@ -8,7 +8,7 @@ class Solution {
             map.put(a, map.getOrDefault(a, 0) + 1);
         }
         HashSet<Integer> set = new HashSet<>(map.values());
-        return set.size() == map.values().size();
+        return set.size() == map.size();
     }
 
     public static void main(String args[]){
