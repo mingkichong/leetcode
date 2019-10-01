@@ -3,9 +3,12 @@ import java.util.*;
 class Solution {
 
     public String customSortString(String S, String T) {
-        HashMap<Character, Integer> map = new HashMap<>();
+        int [] map = new int[26];
+        for(int i = 0; i < map.length; i++){
+            map[i] = Integer.MAX_VALUE;
+        }
         for(int i = 0; i < S.length(); i++){
-            map.put(S.charAt(i), i);
+            map[S.charAt(i) - 'a'] = i;
         }
         Character [] tArray = new Character[T.length()];
         for(int i = 0; i < tArray.length; i++){
@@ -13,7 +16,7 @@ class Solution {
         }
         Arrays.sort(tArray, new Comparator<Character>(){
             public int compare(Character o1, Character o2){
-                return map.getOrDefault(o1, Integer.MAX_VALUE) - map.getOrDefault(o2, Integer.MAX_VALUE);
+                return map[o1 - 'a'] - map[o2 - 'a'];
             }
         });
         StringBuilder sb = new StringBuilder();
