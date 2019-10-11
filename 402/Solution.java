@@ -5,59 +5,25 @@ class Solution {
         if(num.length() <= k){
             return "0";
         }
-        for(int i = 0; i < k; i++){
-            num = removeKdigit(num);
-        }
-        if(num.length() == 0){
-            return "0";
-        }
-        return num;
-    }
-
-    private String removeKdigit(String num){
-        String minString = num;
+        Stack<Character> stack = new Stack<>();
         for(int i = 0; i < num.length(); i++){
-            String valueString = removeChar(num, i);
-            if(valueString.equals(minString)){
-                continue;
+            while(k > 0 && !stack.empty() && num.charAt(i) < stack.peek()){
+                stack.pop();
+                k--;
             }
-            if(isLessThan(valueString, minString)){
-                minString = removeHeadZero(valueString);
-            }
-            else{
-                break;
-            }
+            stack.push(num.charAt(i));
         }
-        return minString;
-    }
-
-    private boolean isLessThan(String a, String b){
-        if(a.length() < b.length()){
-            return true;
+        for(; k > 0 && !stack.empty(); k--){
+            stack.pop();
         }
-        else if(a.length() > b.length() || a.equals(b)){
-            return false;
+        String result = "";
+        while(!stack.empty()){
+            result = stack.pop() + result;
         }
-        for(int i = 0; i < a.length(); i++){
-            if(a.charAt(i) < b.charAt(i)){
-                return true;
-            }
-            else if(a.charAt(i) > b.charAt(i)){
-                return false;
-            }
+        while(result.length() > 1 && result.charAt(0) == '0'){
+            result = result.substring(1, result.length());
         }
-        return false;
-    }
-
-    private String removeHeadZero(String num){
-        while(num.length() > 0 && num.charAt(0) == '0'){
-            num = num.substring(1, num.length());
-        }
-        return num;
-    }
-
-    private String removeChar(String num, int i){
-        return num.substring(0, i) + num.substring(i+1, num.length());
+        return result;
     }
 
     public static void main(String args[]){
