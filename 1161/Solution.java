@@ -1,9 +1,16 @@
 import java.util.*;
 
 class Solution {
-    public int maxLevelSumDFS(TreeNode root) {
+    public boolean isBFS = true;
+
+    public int maxLevelSum(TreeNode root) {
         ArrayList<Integer> levelSums = new ArrayList<>();
-        dfs(root, 1, levelSums);
+        if(isBFS){
+            bfs(root, levelSums);
+        }
+        else{
+            dfs(root, 1, levelSums);
+        }
         int max = Integer.MIN_VALUE;
         int maxLevel = 0;
         for(int i = 0; i < levelSums.size(); i++){
@@ -30,27 +37,25 @@ class Solution {
         }
     }
 
-    public int maxLevelSum(TreeNode root) {
-        ArrayList<Integer> levelSums = new ArrayList<>();
-
+    private void bfs(TreeNode node, ArrayList<Integer> levelSums){
         LinkedList<TreeNode> queue = new LinkedList<>();
         LinkedList<Integer> levelQ = new LinkedList<>();
 
-        queue.add(root);
+        queue.add(node);
         levelQ.add(1);
         int levelSum = 0;
 
         while(queue.size() > 0){
             int level = levelQ.removeFirst();
-            TreeNode node = queue.removeFirst();
-            levelSum += node.val;
+            TreeNode n = queue.removeFirst();
+            levelSum += n.val;
 
-            if(node.left != null){
-                queue.add(node.left);
+            if(n.left != null){
+                queue.add(n.left);
                 levelQ.add(level+1);
             }
-            if(node.right != null){
-                queue.add(node.right);
+            if(n.right != null){
+                queue.add(n.right);
                 levelQ.add(level+1);
             }
 
@@ -59,23 +64,16 @@ class Solution {
                 levelSum = 0;
             }
         }
-
-        int max = Integer.MIN_VALUE;
-        int maxLevel = 0;
-        for(int i = 0; i < levelSums.size(); i++){
-            if(max < levelSums.get(i)){
-                max = levelSums.get(i);
-                maxLevel = i;
-            }
-        }
-        return maxLevel + 1;
     }
 
     public static void main(String args[]){
         Solution s = new Solution();
-        TreeNode root = TreeNode.createBinaryTree(new Integer[]{989,null,10250,98693,-89388,null,null,null,-32127});
+        TreeNode root = TreeNode.createBinaryTree(new Integer[]{1,7,0,7,-8,null,null});
+        // TreeNode root = TreeNode.createBinaryTree(new Integer[]{989,null,10250,98693,-89388,null,null,null,-32127});
+        s.isBFS = true;
         System.out.println(s.maxLevelSum(root));
-        System.out.println(s.maxLevelSumDFS(root));
+        s.isBFS = false;
+        System.out.println(s.maxLevelSum(root));
     }
 }
 
