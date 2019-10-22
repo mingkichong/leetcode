@@ -11,10 +11,7 @@ class Solution {
         ArrayList<List<Integer>> results = new ArrayList<>();
         for(int i = 0; i < arr.length - 1; i++){
             if(Math.abs(arr[i] - arr[i+1]) == minDiff){
-                ArrayList<Integer> list = new ArrayList<>();
-                list.add(arr[i]);
-                list.add(arr[i+1]);
-                results.add(list);
+                results.add(Arrays.asList(arr[i], arr[i+1]));
             }
         }
         return results;
