@@ -5,20 +5,20 @@ class Solution {
     public boolean validPalindrome(String str) {
         char[] s = str.toCharArray();
         int l = 0, r = s.length - 1;
-        while(l < r){
-            if(s[l] == s[r]){
+        while (l < r) {
+            if (s[l] == s[r]) {
                 l++; r--;
-            }else if(diffCount == 0){
+            } else if (diffCount == 0) {
                 diffCount = 1;
-                return validPalindrome(str.substring(l, r)) || validPalindrome(str.substring(l+1, r+1));
-            }else{
+                return validPalindrome(str.substring(l, r)) || validPalindrome(str.substring(l + 1, r + 1));
+            } else {
                 return false;
             }
         }
         return true;
     }
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         Solution s = new Solution();
         // String testcase = "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga";
         // String testcase = "ebcbbececabbacecbbcbe";
