@@ -6,27 +6,27 @@ class Solution {
         int l = 0;
         int count = 1;
         int printI = 0;
-        for(int i = 1; i < s.length; i++){
-            if(s[l] == s[i]){
+        for (int i = 1; i < s.length; i++) {
+            if (s[l] == s[i]) {
                 count++;
-            }else{
+            } else {
                 printI = compressChars(s, l, printI, count);
                 count = 1;
                 l = i;
             }
         }
         // check last char
-        if(s[l] == s[s.length-1]){
+        if (s[l] == s[s.length - 1]) {
             printI = compressChars(s, l, printI, count);
         }
         return printI;
     }
 
-    private int compressChars(char [] s, int l, int printI, int count){
+    private int compressChars(char [] s, int l, int printI, int count) {
         s[printI] = s[l]; printI++;
-        if(count > 1){
-            char [] length = ("" + count).toCharArray();
-            for(int j = 0; j < length.length; j++, printI++){
+        if (count > 1) {
+            char [] length = Integer.toString(count).toCharArray();
+            for (int j = 0; j < length.length; j++, printI++) {
                 s[printI] = length[j];
             }
         }
@@ -40,13 +40,13 @@ class Solution {
         test(s, "abbbbbbbbbbbb");
         test(s, "abbbbbbbbbbbc");
         String testStr = "";
-        for(int i = 0; i < 1000; i++){
+        for (int i = 0; i < 1000; i++) {
             testStr += "b";
         }
         test(s, testStr);
     }
 
-    private static void test(Solution s, String str){
+    private static void test(Solution s, String str) {
         char [] chars = str.toCharArray();
         int pos = s.compress(chars);
         printArray(chars, pos);
