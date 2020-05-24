@@ -26,9 +26,8 @@ class Solution {
         s[printI] = s[l]; printI++;
         if (count > 1) {
             char [] length = Integer.toString(count).toCharArray();
-            for (int j = 0; j < length.length; j++, printI++) {
-                s[printI] = length[j];
-            }
+            System.arraycopy(length, 0, s, printI, length.length);
+            printI += length.length;
         }
         return printI;
     }
