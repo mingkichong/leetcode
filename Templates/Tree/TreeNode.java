@@ -168,7 +168,7 @@ public class TreeNode {
         sb.append("\n");
         printTreeWithStructure(node, "│╞", sb);
         sb.append("└┘");
-        sb.append("\n");
+        sb.append("\n\n");
         return sb.toString();
     }
 
@@ -197,6 +197,7 @@ public class TreeNode {
 
         traverseNodes(sb, "", pointerLeft, node.left, node.right != null);
         traverseNodes(sb, "", pointerRight, node.right, false);
+        sb.append("\n\n");
 
         return sb.toString();
     }
