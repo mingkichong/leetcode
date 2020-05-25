@@ -4,8 +4,21 @@ class Solution {
 
     public List<Integer> luckyNumbers (int[][] matrix) {
         List<Integer> result = new ArrayList<>();
-        int [] rowMin = getRowMins(matrix);
-        int [] colMax = getColMaxs(matrix);
+        int [] rowMin = new int[matrix.length];
+        for(int i = 0; i < rowMin.length; i++){
+            rowMin[i] = Integer.MAX_VALUE;
+        }
+        int [] colMax = new int[matrix[0].length];
+        for(int i = 0; i < colMax.length; i++){
+            colMax[i] = Integer.MIN_VALUE;
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                rowMin[i] = Math.min(rowMin[i], matrix[i][j]);
+                colMax[j] = Math.max(colMax[j], matrix[i][j]);
+            }
+        }
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
@@ -16,38 +29,6 @@ class Solution {
         }
 
         return result;
-    }
-
-    private int[] getRowMins(int[][] matrix) {
-        int [] result = new int[matrix.length];
-        for (int i = 0; i < matrix.length; i++) {
-            result[i] = minRow(i, matrix);
-        }
-        return result;
-    }
-
-    private int[] getColMaxs(int[][] matrix) {
-        int [] result = new int[matrix[0].length];
-        for (int i = 0; i < matrix[0].length; i++) {
-            result[i] = maxCol(i, matrix);
-        }
-        return result;
-    }
-
-    private int minRow(final int ROW, int[][] matrix) {
-        int min = matrix[ROW][0];
-        for (int i = 1; i < matrix[0].length; i++) {
-            min = Math.min(min, matrix[ROW][i]);
-        }
-        return min;
-    }
-
-    private int maxCol(final int COL, int[][] matrix) {
-        int max = matrix[0][COL];
-        for (int i = 1; i < matrix.length; i++) {
-            max = Math.max(max, matrix[i][COL]);
-        }
-        return max;
     }
 
     public static void main(String args[]) {
