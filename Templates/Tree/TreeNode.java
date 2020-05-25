@@ -27,6 +27,8 @@ public class TreeNode {
         switch(order){
             case PREORDER:
                 return getTreeWithStructurePreOrder(this);
+            case INORDER:
+                return getTreeWithStructure(this);
             default:
                 return toString();
         }
