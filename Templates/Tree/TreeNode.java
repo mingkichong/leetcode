@@ -6,48 +6,48 @@ public class TreeNode {
     TreeNode right;
     TreeNode(int x) { val = x; }
 
-    public enum TraverseOrder{
+    public enum TraverseOrder {
         INORDER, PREORDER, POSTORDER, BFS
     }
 
-    public void print(){
+    public void print() {
         System.out.println(this.toString());
     }
 
-    public static void print(TreeNode node){
+    public static void print(TreeNode node) {
         System.out.println(node.toString());
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return BTreePrinter.printNode(this);
     }
 
-    public String toString(TraverseOrder order){
-        switch(order){
-            case PREORDER:
-                return getTreeWithStructurePreOrder(this);
-            case INORDER:
-                return getTreeWithStructure(this);
-            default:
-                return toString();
+    public String toString(TraverseOrder order) {
+        switch (order) {
+        case PREORDER:
+            return getTreeWithStructurePreOrder(this);
+        case INORDER:
+            return getTreeWithStructure(this);
+        default:
+            return toString();
         }
     }
 
-    public static TreeNode createBinarySearchTree(int [][] nums){
-        if(isNull(nums)){
+    public static TreeNode createBinarySearchTree(int [][] nums) {
+        if (isNull(nums)) {
             return null;
         }
         int count = 0;
-        for(int [] N : nums){
-            if(N != null){
+        for (int [] N : nums) {
+            if (N != null) {
                 count++;
             }
         }
         int [] flatNums = new int[count];
         int i = 0;
-        for(int [] N : nums){
-            if(N != null){
+        for (int [] N : nums) {
+            if (N != null) {
                 flatNums[i] = N[0];
                 i++;
             }
@@ -55,80 +55,76 @@ public class TreeNode {
         return createBinarySearchTree(flatNums);
     }
 
-    public static TreeNode createBinarySearchTree(int [] nums){
-        if(isNull(nums)){
+    public static TreeNode createBinarySearchTree(int [] nums) {
+        if (isNull(nums)) {
             return null;
         }
         TreeNode root = new TreeNode(nums[0]);
-        for(int i = 1; i < nums.length; i++){
+        for (int i = 1; i < nums.length; i++) {
             addBinarySearchTreeNode(root, nums[i]);
         }
         return root;
     }
 
-    private static void addBinarySearchTreeNode(TreeNode node, int num){
-        if(num < node.val){
-            if(node.left == null){
+    private static void addBinarySearchTreeNode(TreeNode node, int num) {
+        if (num < node.val) {
+            if (node.left == null) {
                 node.left = new TreeNode(num);
-            }
-            else{
+            } else {
                 addBinarySearchTreeNode(node.left, num);
             }
-        }
-        else{
-            if(node.right == null){
+        } else {
+            if (node.right == null) {
                 node.right = new TreeNode(num);
-            }
-            else{
+            } else {
                 addBinarySearchTreeNode(node.right, num);
             }
         }
     }
 
-    public static TreeNode createBinaryTree(Integer[] n){
+    public static TreeNode createBinaryTree(Integer[] n) {
         int[][] nums = new int[n.length][];
-        for(int i = 0; i < n.length; i++){
-            if(n[i] != null){
-                nums[i] = new int[]{n[i]};
+        for (int i = 0; i < n.length; i++) {
+            if (n[i] != null) {
+                nums[i] = new int[] {n[i]};
             }
         }
         return createBinaryTree(nums);
     }
 
-    public static TreeNode createBinaryTree(int[] n){
+    public static TreeNode createBinaryTree(int[] n) {
         int[][] nums = new int[n.length][1];
-        for(int i = 0; i < nums.length; i++){
-            nums[i] = new int[]{n[i]};
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = new int[] {n[i]};
         }
         return createBinaryTree(nums);
     }
 
-    public static TreeNode createBinaryTree(int[][] nums){
-        if(isNull(nums)){
+    public static TreeNode createBinaryTree(int[][] nums) {
+        if (isNull(nums)) {
             return null;
         }
         TreeNode [] nodes = new TreeNode[nums.length];
-        for(int i = 0; i < nodes.length; i++){
-            if(nums[i] == null){
+        for (int i = 0; i < nodes.length; i++) {
+            if (nums[i] == null) {
                 nodes[i] = null;
-            }
-            else{
+            } else {
                 nodes[i] = new TreeNode(nums[i][0]);
             }
         }
         int index = 0;
         ArrayList<TreeNode> queue = new ArrayList<TreeNode>();
         queue.add(nodes[index++]);
-        while(queue.size() > 0){
+        while (queue.size() > 0) {
             TreeNode node = queue.remove(0);
-            if(node == null){
+            if (node == null) {
                 continue;
             }
-            if(index < nodes.length){
+            if (index < nodes.length) {
                 node.left = nodes[index++];
                 queue.add(node.left);
             }
-            if(index < nodes.length){
+            if (index < nodes.length) {
                 node.right = nodes[index++];
                 queue.add(node.right);
             }
@@ -136,31 +132,31 @@ public class TreeNode {
         return nodes[0];
     }
 
-    private static void printWithOrder(TreeNode node, TraverseOrder order, StringBuilder sb){
+    private static void printWithOrder(TreeNode node, TraverseOrder order, StringBuilder sb) {
         sb.append("[");
-        if(node == null){
+        if (node == null) {
             sb.append("]");
             return;
         }
         ArrayList<String> list = new ArrayList<>();
         traversePrint(node, order, list);
-        for(int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             sb.append(list.get(i));
-            if(i < list.size()-1){
+            if (i < list.size() - 1) {
                 sb.append(", ");
             }
         }
         sb.append("]");
     }
 
-    public static void printWithOrder(TreeNode node, TraverseOrder order){
+    public static void printWithOrder(TreeNode node, TraverseOrder order) {
         StringBuilder sb = new StringBuilder();
         printWithOrder(node, order, sb);
         System.out.println(sb.toString());
     }
 
-    private static String getTreeWithStructure(TreeNode node){
-        if(node == null){
+    private static String getTreeWithStructure(TreeNode node) {
+        if (node == null) {
             return "──NULL──";
         }
         StringBuilder sb = new StringBuilder();
@@ -172,19 +168,19 @@ public class TreeNode {
         return sb.toString();
     }
 
-    private static void printTreeWithStructure(TreeNode node, String edge, StringBuilder sb){
-        if(node == null){
+    private static void printTreeWithStructure(TreeNode node, String edge, StringBuilder sb) {
+        if (node == null) {
             return;
         }
-        printTreeWithStructure(node.left,  edge+"═══", sb);
+        printTreeWithStructure(node.left,  edge + "═══", sb);
         sb.append(edge + "╡");
         sb.append(node.val);
         sb.append("\n");
-        printTreeWithStructure(node.right, edge+"═══", sb);
+        printTreeWithStructure(node.right, edge + "═══", sb);
     }
 
     // https://www.baeldung.com/java-print-binary-tree-diagram
-    private String getTreeWithStructurePreOrder(TreeNode node){
+    private String getTreeWithStructurePreOrder(TreeNode node) {
         if (node == null) {
             return "";
         }
@@ -225,59 +221,58 @@ public class TreeNode {
         }
     }
 
-    private static boolean isNull(int [][] nums){
-        if(nums == null || nums.length == 0){
+    private static boolean isNull(int [][] nums) {
+        if (nums == null || nums.length == 0) {
             return true;
         }
         return false;
     }
 
-    private static boolean isNull(int [] nums){
-        if(nums == null || nums.length == 0){
+    private static boolean isNull(int [] nums) {
+        if (nums == null || nums.length == 0) {
             return true;
         }
         return false;
     }
 
-    private static void traversePrint(TreeNode node, TraverseOrder order, List<String> list){
-        if(node == null){
+    private static void traversePrint(TreeNode node, TraverseOrder order, List<String> list) {
+        if (node == null) {
             list.add("null");
             return;
         }
-        switch(order){
-            case BFS:
-                printBFS(node, list);
-                break;
-            case PREORDER:
-                list.add("" + node.val);
-                traversePrint(node.left, order, list);
-                traversePrint(node.right, order, list);
-                break;
-            case INORDER:
-                traversePrint(node.left, order, list);
-                list.add("" + node.val);
-                traversePrint(node.right, order, list);
-                break;
-            case POSTORDER:
-                traversePrint(node.left, order, list);
-                traversePrint(node.right, order, list);
-                list.add("" + node.val);
-                break;
+        switch (order) {
+        case BFS:
+            printBFS(node, list);
+            break;
+        case PREORDER:
+            list.add("" + node.val);
+            traversePrint(node.left, order, list);
+            traversePrint(node.right, order, list);
+            break;
+        case INORDER:
+            traversePrint(node.left, order, list);
+            list.add("" + node.val);
+            traversePrint(node.right, order, list);
+            break;
+        case POSTORDER:
+            traversePrint(node.left, order, list);
+            traversePrint(node.right, order, list);
+            list.add("" + node.val);
+            break;
         }
     }
 
-    private static void printBFS(TreeNode head, List<String> list){
-        if(head == null){
+    private static void printBFS(TreeNode head, List<String> list) {
+        if (head == null) {
             return;
         }
         ArrayList<TreeNode> queue = new ArrayList<TreeNode>();
         queue.add(head);
-        while(queue.size() > 0){
+        while (queue.size() > 0) {
             TreeNode node = queue.remove(0);
-            if(node == null){
+            if (node == null) {
                 list.add("null");
-            }
-            else{
+            } else {
                 list.add("" + node.val);
                 queue.add(node.left);
                 queue.add(node.right);
@@ -379,44 +374,44 @@ public class TreeNode {
             return true;
         }
 
-        private static void print(int val){
+        private static void print(int val) {
             print(String.valueOf(val));
         }
 
-        private static void print(String str){
+        private static void print(String str) {
             sb.append(str);
         }
 
-        private static void println(int val){
+        private static void println(int val) {
             println(String.valueOf(val));
         }
 
-        private static void println(String str){
+        private static void println(String str) {
             print(str);
             print("\n");
         }
 
-        private static void println(){
+        private static void println() {
             println("");
         }
     }
 
-    public Integer[] serialise(){
+    public Integer[] serialise() {
         return TreeNode.serialise(this);
     }
 
-    public static Integer[] serialise(TreeNode node){
+    public static Integer[] serialise(TreeNode node) {
         List<Integer> list = new ArrayList<>();
-        if(node != null){
+        if (node != null) {
             LinkedList<TreeNode> queue = new LinkedList<>();
             queue.add(node);
-            while(!queue.isEmpty()){
+            while (!queue.isEmpty()) {
                 TreeNode qNode = queue.poll();
-                if(qNode != null){
+                if (qNode != null) {
                     list.add(qNode.val);
                     queue.add(qNode.left);
                     queue.add(qNode.right);
-                }else{
+                } else {
                     list.add(null);
                 }
             }
