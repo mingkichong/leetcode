@@ -401,6 +401,10 @@ public class TreeNode {
         }
     }
 
+    public Integer[] serialise(){
+        return TreeNode.serialise(this);
+    }
+
     public static Integer[] serialise(TreeNode node){
         List<Integer> list = new ArrayList<>();
         if(node != null){
