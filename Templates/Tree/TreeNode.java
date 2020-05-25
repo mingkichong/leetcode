@@ -416,6 +416,17 @@ public class TreeNode {
                 }
             }
         }
+        list = trimNulls(list);
         return list.toArray(new Integer[list.size()]);
+    }
+
+    private static List<Integer> trimNulls(List<Integer> list) {
+        while (list.get(0) == null) {
+            list.remove(0);
+        }
+        while (list.get(list.size() - 1) == null) {
+            list.remove(list.size() - 1);
+        }
+        return list;
     }
 }
