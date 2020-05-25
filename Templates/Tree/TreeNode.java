@@ -55,6 +55,22 @@ public class TreeNode {
         return createBinarySearchTree(flatNums);
     }
 
+    public static TreeNode createBinarySearchTree(Integer[] n) {
+        int countNotNull = 0;
+        for (Integer i : n) {
+            if (i != null) {
+                countNotNull++;
+            }
+        }
+        int [] nums = new int[countNotNull];
+        for (int i = 0, nI = 0; i < n.length; i++) {
+            if (n[i] != null) {
+                nums[nI++] = n[i];
+            }
+        }
+        return createBinarySearchTree(nums);
+    }
+
     public static TreeNode createBinarySearchTree(int [] nums) {
         if (isNull(nums)) {
             return null;
