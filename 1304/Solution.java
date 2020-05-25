@@ -3,17 +3,13 @@ import java.util.*;
 class Solution {
 
     public int[] sumZero(int n) {
-        int start = n % 2 == 0 ? 1 : 0;
+        int num = n;
         int result [] = new int[n];
         for (int i = 0; i < n; i++) {
-            if (i % 2 == 0) {
-                result[i] = start;
-                if (n % 2 == 1) start += 3;
-            } else {
-                result[i] = start * -1;
-                if (n % 2 == 0) start += 3;
-            }
+            result[i] = num * (i % 2 == 0 ? 1 : -1);
+            num += i % 2 == 0 ? 0 : n;
         }
+        result[result.length - 1] = (n % 2 == 1) ? 0 : result[result.length - 1];
         return result;
     }
 
