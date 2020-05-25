@@ -5,13 +5,8 @@ class Solution {
     public List<Integer> luckyNumbers (int[][] matrix) {
         List<Integer> result = new ArrayList<>();
         int [] rowMin = new int[matrix.length];
-        for(int i = 0; i < rowMin.length; i++){
-            rowMin[i] = Integer.MAX_VALUE;
-        }
+        Arrays.fill(rowMin, Integer.MAX_VALUE);
         int [] colMax = new int[matrix[0].length];
-        for(int i = 0; i < colMax.length; i++){
-            colMax[i] = Integer.MIN_VALUE;
-        }
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
