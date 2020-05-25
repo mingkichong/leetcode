@@ -26,6 +26,6 @@ class Driver{
         TreeNode.print(head);
         head.print();
         System.out.println(head);
-
+        System.out.println(head.toString(TreeNode.TraverseOrder.PREORDER));
     }
 }
