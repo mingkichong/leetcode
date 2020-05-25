@@ -399,4 +399,23 @@ public class TreeNode {
             println("");
         }
     }
+
+    public static Integer[] serialise(TreeNode node){
+        List<Integer> list = new ArrayList<>();
+        if(node != null){
+            LinkedList<TreeNode> queue = new LinkedList<>();
+            queue.add(node);
+            while(!queue.isEmpty()){
+                TreeNode qNode = queue.poll();
+                if(qNode != null){
+                    list.add(qNode.val);
+                    queue.add(qNode.left);
+                    queue.add(qNode.right);
+                }else{
+                    list.add(null);
+                }
+            }
+        }
+        return list.toArray(new Integer[list.size()]);
+    }
 }
