@@ -23,6 +23,15 @@ public class TreeNode {
         return getTreeWithStructure(this);
     }
 
+    public String toString(TraverseOrder order){
+        switch(order){
+            case PREORDER:
+                return getTreeWithStructurePreOrder(this);
+            default:
+                return toString();
+        }
+    }
+
     public static TreeNode createBinarySearchTree(int [][] nums){
         if(isNull(nums)){
             return null;
@@ -170,6 +179,47 @@ public class TreeNode {
         sb.append(node.val);
         sb.append("\n");
         printTreeWithStructure(node.right, edge+"═══", sb);
+    }
+
+    // https://www.baeldung.com/java-print-binary-tree-diagram
+    private String getTreeWithStructurePreOrder(TreeNode node){
+        if (node == null) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(node.val);
+
+        String pointerRight = "└──";
+        String pointerLeft = (node.right != null) ? "├──" : "└──";
+
+        traverseNodes(sb, "", pointerLeft, node.left, node.right != null);
+        traverseNodes(sb, "", pointerRight, node.right, false);
+
+        return sb.toString();
+    }
+
+    private void traverseNodes(StringBuilder sb, String padding, String pointer, TreeNode node, boolean hasRightSibling) {
+        if (node != null) {
+            sb.append("\n");
+            sb.append(padding);
+            sb.append(pointer);
+            sb.append(node.val);
+
+            StringBuilder paddingBuilder = new StringBuilder(padding);
+            if (hasRightSibling) {
+                paddingBuilder.append("│  ");
+            } else {
+                paddingBuilder.append("   ");
+            }
+
+            String paddingForBoth = paddingBuilder.toString();
+            String pointerRight = "└──";
+            String pointerLeft = (node.right != null) ? "├──" : "└──";
+
+            traverseNodes(sb, paddingForBoth, pointerLeft, node.left, node.right != null);
+            traverseNodes(sb, paddingForBoth, pointerRight, node.right, false);
+        }
     }
 
     private static boolean isNull(int [][] nums){
