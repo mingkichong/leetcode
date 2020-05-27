@@ -463,7 +463,7 @@ public class TreeNode {
     }
 
     public static Integer[] serialise(TreeNode node) {
-        List<Integer> list = new ArrayList<>();
+        LinkedList<Integer> list = new LinkedList<>();
         if (node != null) {
             LinkedList<TreeNode> queue = new LinkedList<>();
             queue.add(node);
@@ -477,17 +477,17 @@ public class TreeNode {
                     list.add(null);
                 }
             }
+            list = trimNulls(list);
         }
-        list = trimNulls(list);
         return list.toArray(new Integer[list.size()]);
     }
 
-    private static List<Integer> trimNulls(List<Integer> list) {
-        while (list.get(0) == null) {
-            list.remove(0);
+    private static LinkedList<Integer> trimNulls(LinkedList<Integer> list) {
+        while (list.getFirst() == null) {
+            list.removeFirst();
         }
-        while (list.get(list.size() - 1) == null) {
-            list.remove(list.size() - 1);
+        while (list.getLast() == null) {
+            list.removeLast();
         }
         return list;
     }

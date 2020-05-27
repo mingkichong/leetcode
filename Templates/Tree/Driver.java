@@ -32,8 +32,10 @@ class Driver {
         System.out.println(head.toString(TreeNode.TraverseOrder.PREORDER));
 
         head = TreeNode.createBinaryTree(nums3);
+
         for (int i = 0; i < 10; i++) {
             Integer [] serialised = TreeNode.serialise(head);
+            System.out.println(Arrays.toString(serialised));
             head = TreeNode.createBinaryTree(serialised);
         }
         System.out.println(head);
