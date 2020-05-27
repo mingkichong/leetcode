@@ -437,19 +437,17 @@ public class TreeNode {
      *  getNodeByVal
      **************************************************************/
     public static TreeNode getNodeByVal(TreeNode root, int val) {
-        if (root == null) {
-            return null;
-        }
-        if (root.val == val) {
-            return root;
-        }
-        TreeNode node = getNodeByVal(root.left, val);
-        if (node != null) {
-            return node;
-        }
-        node = getNodeByVal(root.right, val);
-        if (node != null) {
-            return node;
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node != null) {
+                if(node.val == val){
+                    return node;
+                }
+                queue.add(node.left);
+                queue.add(node.right);
+            }
         }
         return null;
     }
