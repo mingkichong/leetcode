@@ -296,6 +296,24 @@ public class TreeNode {
         }
     }
 
+    public static TreeNode getNodeByVal(TreeNode root, int val) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == val) {
+            return root;
+        }
+        TreeNode node = getNodeByVal(root.left, val);
+        if (node != null) {
+            return node;
+        }
+        node = getNodeByVal(root.right, val);
+        if (node != null) {
+            return node;
+        }
+        return null;
+    }
+
     // https://www.inlumina.work/core-java/java-binary-tree-printer/
     static class BTreePrinter {
         private static StringBuilder sb = null;

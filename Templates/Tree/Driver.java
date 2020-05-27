@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
-class Driver{
-    public static void main(String args[]){
-        int [][] nums = {{8},{12},{18},{1},{4},{7},{10},{5},{6},null,{3}};
+class Driver {
+    public static void main(String args[]) {
+        int [][] nums = {{8}, {12}, {18}, {1}, {4}, {7}, {10}, {5}, {6}, null, {3}};
         int [] nums2  = {8, 12, 18, 1, 4, 7, 10, 5, 6, 3};
         Integer [] nums3 = {8, 12, 18, 1, 4, 7, 10, 5, 6, null, 3};
         // int [][] nums = {null};
@@ -32,10 +32,13 @@ class Driver{
         System.out.println(head.toString(TreeNode.TraverseOrder.PREORDER));
 
         head = TreeNode.createBinaryTree(nums3);
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             Integer [] serialised = TreeNode.serialise(head);
             head = TreeNode.createBinaryTree(serialised);
         }
         System.out.println(head);
+
+        System.out.println(TreeNode.getNodeByVal(TreeNode.createBinaryTree(nums3), 18));
+        System.out.println(TreeNode.getNodeByVal(TreeNode.createBinaryTree(nums3), 12));
     }
 }
