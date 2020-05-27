@@ -477,18 +477,17 @@ public class TreeNode {
                     list.add(null);
                 }
             }
-            list = trimNulls(list);
+            trimNulls(list);
         }
         return list.toArray(new Integer[list.size()]);
     }
 
-    private static LinkedList<Integer> trimNulls(LinkedList<Integer> list) {
+    private static void trimNulls(LinkedList<Integer> list) {
         while (list.getFirst() == null) {
             list.removeFirst();
         }
         while (list.getLast() == null) {
             list.removeLast();
         }
-        return list;
     }
 }
