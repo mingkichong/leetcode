@@ -244,34 +244,34 @@ public class TreeNode {
         case PREORDER:
             return getTreeWithStructurePreOrder(this);
         case INORDER:
-            return getTreeWithStructure(this);
+            return getTreeWithStructureInOrder(this);
         default:
             return toString();
         }
     }
 
-    private String getTreeWithStructure(TreeNode node) {
+    private String getTreeWithStructureInOrder(TreeNode node) {
         if (node == null) {
             return "──NULL──";
         }
         StringBuilder sb = new StringBuilder();
         sb.append("┌┐");
         sb.append("\n");
-        printTreeWithStructure(node, "│╞", sb);
+        printTreeWithStructureInOrder(node, "│╞", sb);
         sb.append("└┘");
         sb.append("\n\n");
         return sb.toString();
     }
 
-    private void printTreeWithStructure(TreeNode node, String edge, StringBuilder sb) {
+    private void printTreeWithStructureInOrder(TreeNode node, String edge, StringBuilder sb) {
         if (node == null) {
             return;
         }
-        printTreeWithStructure(node.left,  edge + "═══", sb);
+        printTreeWithStructureInOrder(node.left,  edge + "═══", sb);
         sb.append(edge + "╡");
         sb.append(node.val);
         sb.append("\n");
-        printTreeWithStructure(node.right, edge + "═══", sb);
+        printTreeWithStructureInOrder(node.right, edge + "═══", sb);
     }
 
     // https://www.baeldung.com/java-print-binary-tree-diagram
