@@ -250,6 +250,35 @@ public class TreeNode {
         }
     }
 
+    public String toPrettyTreeString() {
+        return toPrettyTreeString(this);
+    }
+
+    public static String toPrettyTreeString(TreeNode node) {
+        StringBuilder sb = new StringBuilder();
+        prettyPrintTree(node,  "", true, sb);
+        return sb.toString();
+    }
+
+    private static void prettyPrintTree(TreeNode node, String prefix, boolean isLeft, StringBuilder sb) {
+        if (node == null) {
+            sb.append("Empty tree");
+            sb.append("\n");
+            return;
+        }
+
+        if (node.right != null) {
+            prettyPrintTree(node.right, prefix + (isLeft ? "│   " : "    "), false, sb);
+        }
+
+        sb.append(prefix + (isLeft ? "└── " : "┌── ") + node.val);
+        sb.append("\n");
+
+        if (node.left != null) {
+            prettyPrintTree(node.left, prefix + (isLeft ? "    " : "│   "), true, sb);
+        }
+    }
+
     private String getTreeWithStructureInOrder(TreeNode node) {
         if (node == null) {
             return "──NULL──";
@@ -442,7 +471,7 @@ public class TreeNode {
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
             if (node != null) {
-                if(node.val == val){
+                if (node.val == val) {
                     return node;
                 }
                 queue.add(node.left);

@@ -42,5 +42,7 @@ class Driver {
 
         System.out.println(TreeNode.getNodeByVal(TreeNode.createBinaryTree(nums3), 18));
         System.out.println(TreeNode.getNodeByVal(TreeNode.createBinaryTree(nums3), 12));
+
+        System.out.println(head.toPrettyTreeString());
     }
 }
