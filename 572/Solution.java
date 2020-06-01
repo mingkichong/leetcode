@@ -3,21 +3,13 @@ import java.util.*;
 class Solution {
 
     public boolean isSubtree(TreeNode s, TreeNode t) {
-        if (s == null && t == null) {
-            return true;
-        } else if (s == null && t != null) {
-            return false;
-        }
-        if (isIdentical(s, t)) {
-            return true;
-        }
-        return isSubtree(s.left, t) || isSubtree(s.right, t);
+        return s != null && (isIdentical(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t));
     }
 
     private boolean isIdentical(TreeNode s, TreeNode t) {
         if (s == null && t == null) {
             return true;
-        } else if (s == null && t != null || s != null && t == null || s.val != t.val) {
+        } else if (s == null || t == null || s.val != t.val) {
             return false;
         }
         return isIdentical(s.left, t.left) && isIdentical(s.right, t.right);
